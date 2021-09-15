@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "python-cei-crawler"
+version = "0.1.0"
+description = "Biblioteca em python para obtenção de seus dados de investimentos na bolsa de valores (B3/CEI)."
+authors = ["MuriloScarpaSitonio <muriloscarpa@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "3.7.4"
+beautifulsoup4 = "4.10.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "6.2.5"
+pylint = "2.10.2"
+pylint-runner = "0.6.0"
+bandit = "1.7.0"
+black = "21.9b0"
+mypy = "0.910"
+pytest-asyncio = "0.15.1"
+
+[tool.pylint.master]
+fail-under = 9.5
+ignore = "setup.py"
+ignore-patterns = "test_.*?py"
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-module-docstring", 
+    "missing-function-docstring", 
+    "missing-class-docstring",
+    "too-many-arguments",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-few-public-methods",
+    "too-many-locals",
+    "duplicate-code"
+]
+
+[tool.pylint.basic]
+good-names = ["i", "j", "id"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
