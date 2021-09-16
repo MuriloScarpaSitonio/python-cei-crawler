@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-cei-crawler"
-version = "0.1.0"
+version = "0.1.1"
 description = "Biblioteca em python para obtenção de seus dados de investimentos na bolsa de valores (B3/CEI)."
 authors = ["MuriloScarpaSitonio <muriloscarpa@gmail.com>"]
 license = "MIT"
