@@ -34,7 +34,7 @@ test:
 
 
 code-convention:
-	pylint_runner
+	pylint cei_crawler
 	black . --check
 
 
