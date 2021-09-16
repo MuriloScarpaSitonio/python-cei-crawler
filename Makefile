@@ -34,16 +34,16 @@ test:
 
 
 code-convention:
-	pylint_runner
+	pylint cei_crawler
 	black . --check
 
 
 security-checker:
-	bandit -r . --exclude=/tests
+	bandit -r . --exclude=/tests,/.venv
 
 
 typing-checker:
-	mypy . --ignore-missing-imports
+	mypy . --exclude=.venv --ignore-missing-imports
 
 
 pipeline: test code-convention security-checker typing-checker
