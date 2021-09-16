@@ -34,7 +34,6 @@ test:
 
 
 code-convention:
-	pylint_runner
 	black . --check
 
 
