@@ -34,6 +34,7 @@ test:
 
 
 code-convention:
+	pylint_runner --ignore=.venv
 	black . --check
 
 
