@@ -4,6 +4,17 @@ version = "0.1.0"
 description = "Biblioteca em python para obtenção de seus dados de investimentos na bolsa de valores (B3/CEI)."
 authors = ["MuriloScarpaSitonio <muriloscarpa@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/MuriloScarpaSitonio/python-cei-crawler"
+repository = "https://github.com/MuriloScarpaSitonio/python-cei-crawler"
+keywords = ["bolsa", "cei", "crawler", "ações", "dividendos"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+]
+include = ["LICENSE"]
+packages = [{ include = "cei_crawler" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
