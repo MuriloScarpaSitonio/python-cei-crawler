@@ -48,6 +48,27 @@ class CeiClient:
             ),
         }
 
+    @staticmethod
+    async def _get_date_str(
+        broker: Broker,
+        date: Optional[date_typing],
+        is_end_date: bool = True,
+    ) -> str:
+        if (
+            date
+            and datetime.strptime(broker.parse_extra_data.start_date, "%d/%m/%Y").date()
+            <= date
+            <= datetime.strptime(broker.parse_extra_data.end_date, "%d/%m/%Y").date()
+        ):
+            # By some reason, CEI will return some "nonsense" data if
+            # we pass a date out of range
+            return date.strftime("%d/%m/%Y")
+        return (
+            broker.parse_extra_data.end_date
+            if is_end_date
+            else broker.parse_extra_data.start_date
+        )
+
     async def login(self) -> bool:
         async with self.session.get(self.LOGIN_URL) as response:
             html = BeautifulSoup(await response.text(), "html.parser")
@@ -129,17 +150,6 @@ class CeiClient:
         if not self.__is_logged__:
             await self.login()
 
-        start_date_str = (
-            start_date.strftime("%d/%m/%Y")
-            if start_date is not None
-            else broker.parse_extra_data.start_date
-        )
-        end_date_str = (
-            end_date.strftime("%d/%m/%Y")
-            if end_date is not None
-            else broker.parse_extra_data.end_date
-        )
-
         payload = {
             "ctl00$ContentPlaceHolder1$ToolkitScriptManager1": (
                 "ctl00$ContentPlaceHolder1$updFiltro|ctl00$ContentPlaceHolder1"
@@ -151,8 +161,12 @@ class CeiClient:
             "__EVENTVALIDATION": account.parse_extra_data.event_validation,
             "ctl00$ContentPlaceHolder1$ddlAgentes": broker.value,
             "ctl00$ContentPlaceHolder1$ddlContas": account.id,
-            "ctl00$ContentPlaceHolder1$txtDataDeBolsa": start_date_str,
-            "ctl00$ContentPlaceHolder1$txtDataAteBolsa": end_date_str,
+            "ctl00$ContentPlaceHolder1$txtDataDeBolsa": await self._get_date_str(
+                broker=broker, date=start_date, is_end_date=False
+            ),
+            "ctl00$ContentPlaceHolder1$txtDataAteBolsa": await self._get_date_str(
+                broker=broker, date=end_date
+            ),
             "ctl00$ContentPlaceHolder1$btnConsultar": "Consultar",
             "__ASYNCPOST": True,
         }
@@ -160,19 +174,6 @@ class CeiClient:
         return await self.session.post(
             self.base_url, data=payload, headers=await self._get_headers()
         )
-
-    @staticmethod
-    async def _get_date_str(broker: Broker, date: Optional[date_typing]) -> str:
-        if (
-            date
-            and datetime.strptime(broker.parse_extra_data.start_date, "%d/%m/%Y").date()
-            <= date
-            <= datetime.strptime(broker.parse_extra_data.end_date, "%d/%m/%Y").date()
-        ):
-            # By some reason, CEI will return some "nonsense" data if
-            # we pass a date out of range
-            return date.strftime("%d/%m/%Y")
-        return broker.parse_extra_data.end_date
 
     async def get_passive_incomes_extract(
         self, broker: Broker, date: Optional[date_typing] = None
