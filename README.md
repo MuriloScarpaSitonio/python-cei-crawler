@@ -1,4 +1,4 @@
-# cei-crawler
+# python-cei-crawler
 Biblioteca em python para obtenção de seus dados de investimentos na bolsa de valores (B3/CEI).
 
 Esse projeto é altamente influenciado por [bolsa](https://github.com/gicornachini/bolsa). De fato, eu apenas simplifiquei, adicionei e estendi algumas funcionalidades.
@@ -8,7 +8,7 @@ Esse projeto é altamente influenciado por [bolsa](https://github.com/gicornachi
 
 ## Instalação
 ```
-$ pip install cei-crawler
+$ pip install python-cei-crawler
 ```
 
 ## Utilização
