@@ -34,7 +34,7 @@ test:
 
 
 code-convention:
-	pylint_runner --ignore=.venv
+	pylint cei_crawler
 	black . --check
 
 
