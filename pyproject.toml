@@ -21,7 +21,7 @@ pytest-asyncio = "0.15.1"
 
 [tool.pylint.master]
 fail-under = 9.5
-ignore = "venv,setup.py"
+ignore = ".venv,setup.py"
 ignore-patterns = "test_.*?py"
 
 [tool.pylint.messages_control]

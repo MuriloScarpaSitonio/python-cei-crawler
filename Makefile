@@ -39,11 +39,11 @@ code-convention:
 
 
 security-checker:
-	bandit -r . --exclude=/tests,/venv
+	bandit -r . --exclude=/tests,/.venv
 
 
 typing-checker:
-	mypy . --exclude=venv --ignore-missing-imports
+	mypy . --exclude=.venv --ignore-missing-imports
 
 
 pipeline: test code-convention security-checker typing-checker
