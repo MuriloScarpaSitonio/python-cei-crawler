@@ -50,8 +50,8 @@ Obtém uma lista de ativos filtrados pelo parâmetros passados à função. Reto
 | Atributo | Tipo | Descrição |
 | :-------------: |:-------------:| -----|
 | `brokers` | `Optional[List[Broker]]` | Retorna apenas os ativos destes brokers |
-| `start_date` | `Optional[date]` | Retorna apenas os ativos com data posterior ou igual a esta |
-| `end_date` | `Optional[date]` | Retorna apenas os ativos com data inferior ou igual a esta |
+| `start_date` | `Optional[date]` | Retorna apenas os ativos com data posterior ou igual a esta. Por favor, note que o CEI aceita datas dentro de um *range* específico. Se a data passada à função estiver fora, será usado o respectivo valor do *range* inferior. |
+| `end_date` | `Optional[date]` | Retorna apenas os ativos com data inferior ou igual a esta. Por favor, note que o CEI aceita datas dentro de um *range* específico. Se a data passada à função estiver fora, será usado o respectivo valor do *range* superior. |
 | `as_dict` | `bool` | Retorna os ativos como dicionários ao invés de objetos `AssetExtract`. Default: `False` |
 
 ### `get_passive_incomes_extract`
